@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block header %}
+<h1>Integrando HTML ao Flask</h1>
+{% endblock %} {% block title %}Flask App{% endblock %} {% block content %}
+
+<hr />
+<p>Olá Mundo</p>
+<hr />
+HTML: 1 + 1 = 11
+<br />
+Flask: 1 + 1 = {{ 1+1 }}
+<br />
+<hr />
+<p>
+  Meu nome é {{nome}}, eu tenho {{idade}} anos e minha fruta preferida é
+  {{frutas[aleatorio]}}
+</p>
+<hr />
+<form action="{{url_for('home')}}" method="post">
+  <div class="card">
+
+    <div class="card-body">
+      <div clasas="form-group">
+        <label for="frutas_input">Nome da Fruta</label>
+        <input
+          type="text"
+          class="form-control"
+          id="frutas_input"
+          name="frutas_input"
+          placeholder="Digite o nome de uma fruta..."
+        />
+      </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+  </div>
+</form>
+<label for="frutas">Frutas que eu gosto:</label>
+<ol id="frutas">
+  {% for fruta in frutas %}
+  <li>{{fruta}}</li>
+  {% endfor %}
+</ol>
+<hr />
+{% endblock %}

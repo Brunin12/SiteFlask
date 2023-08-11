@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block header %}Diário do Proferssor{% endblock %}
+{% block title %}Class It{% endblock %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header with-border">
+    <h3 class="card-title">Notas dos Alunos</h3>
+  </div>
+  <div class="card-body">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Inserir Aluno</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form action="{{url_for('alunos')}}" method="post">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="aluno_input">Nome do Aluno</label>
+            <input
+              type="text"
+              class="form-control"
+              id="aluno_input"
+              name="aluno_input"
+              required
+              placeholder="Digite o nome de um aluno..."
+            />
+          </div>
+          <div class="form-group">
+            <label for="nota_input">Nota do Aluno</label>
+            <input
+              type="number"
+              max="10"
+              min="0"
+              step="0.01"
+              class="form-control"
+              id="nota_input"
+              name="nota_input"
+              required
+              placeholder="Digite a nota do aluno..."
+            />
+          </div>
+        </div>
+
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <button type="submit" class="btn bg-gradient-primary">Enviar</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.card -->
+    {% for aluno in registros %}
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="card card-collapsed {% if (aluno.nota) < 6 %} card-danger {% elif (aluno.nota) < 8 %} card-warning {% else %} card-success {% endif %}"
+          data-card-widget="collapse"
+          id="nota_{{aluno.nome}}"
+        >
+          <div class="card-header">
+            <h3 class="card-title">{{aluno.nome}}</h3>
+            <div class="card-tools">
+              <button
+                type="button"
+                class="btn btn-tool"
+                data-card-widget="collapse"
+              >
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            class="card-body {% if aluno.nota < 6 %} bg-gradient-danger {% elif aluno.nota < 8 %} bg-warning {% else %} bg-gradient-success {% endif %}"
+          >
+            <p
+              class="alert w-50 h3 mx-auto text-center {% if aluno.nota < 6 %} alert-warning animation__shake {% elif aluno.nota < 8 %} alert-danger {% else %} alert-info {% endif %}"
+            >
+              Nota: {{aluno.nota}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inclua o jQuery antes deste script -->
+    <script>
+      $(document).ready(function () {
+        $(".card-body").addClass("collapsed");
+      });
+    </script>
+
+    <hr />
+    {% endfor %}
+  </div>
+</div>
+
+<hr />
+{% endblock %}

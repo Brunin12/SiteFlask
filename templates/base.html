@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Inclua o Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <!-- Inclua o Font Awesome CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminlte/plugins/fontawesome/css/all.min.css') }}"
+    />
+
+    <!-- Inclua os arquivos CSS do AdminLTE -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminlte/dist/css/adminlte.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='adminlte/plugins/sweetalert2/sweetalert2.css') }}"
+    />
+  </head>
+  <body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand-md navbar-dark">
+        <!-- Esquerda Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="{{url_for('alunos')}}" class="nav-link">
+              <p>Class It</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{url_for('cursos_lista')}}" class="nav-link">
+              <p>Educa+</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url_for('sobre')}}" class="nav-link">
+              <p>Sobre</p>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Super Movies
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a
+                class="dropdown-item"
+                href="{{url_for('filmes', categoria='drama')}}"
+                >Drama</a
+              >
+              <a
+                class="dropdown-item"
+                href="{{url_for('filmes', categoria='kids')}}"
+                >Kids</a
+              >
+              <a
+                class="dropdown-item"
+                href="{{url_for('filmes', categoria='populares')}}"
+                >Populares</a
+              >
+              <a
+                class="dropdown-item"
+                href="{{url_for('filmes', categoria='tom_cruise')}}"
+                >Tom Cruise</a
+              >
+              <div class="dropdown-divider"></div>
+              <a
+                class="dropdown-item"
+                href="{{url_for('filmes', categoria='categorias')}}"
+                >Categorias</a
+              >
+            </div>
+          </li>
+        </ul>
+
+        <!-- Direita Navbar -->
+        <ul class="navbar-nav ml-auto">
+          <div class="info">
+            <li class="nav-item">
+              <a class="d-block nav-link" href="{{url_for('home')}}"
+                >Flask App</a
+              >
+            </li>
+          </div>
+        </ul>
+      </nav>
+
+      <!-- Conteúdo da página -->
+      <div class="content-wrapper">
+        <!-- Cabeçalho da página -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col">
+                <h1
+                  class="m-0 text-center title"
+                  style="
+                    font-size: 4em;
+                    font-family: 'Gill Sans', 'Gill Sans MT', Calibri,
+                      'Trebuchet MS', sans-serif;
+                  "
+                >
+                  {% block header %}{% endblock %}
+                </h1>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Conteúdo principal -->
+        <section class="content">
+          <div class="container-fluid">{% block content %}{% endblock %}</div>
+        </section>
+      </div>
+
+      <!-- Rodapé -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block"><b>Versão</b> 0.1.0</div>
+        <strong>&copy; 2023 BrunoSoft.</strong>
+      </footer>
+    </div>
+    <!-- Inclua os arquivos JS do AdminLTE -->
+    <script src="{{ url_for('static', filename='adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='adminlte/dist/js/adminlte.min.js') }}"></script>
+
+    <!-- Inclua o JavaScript do SweetAlert antes do seu script customizado -->
+    <script src="{{ url_for('static', filename='adminlte/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cursos_lista.js') }}"></script>
+  </body>
+</html>

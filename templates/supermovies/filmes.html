@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% block title %}Flask App | Filmes{% endblock %}
+{%block header %}Super Movies - Categorias{% endblock %} {% block content %}
+<div class="row">
+  <div class="col-3">
+    <div class="card mb-2">
+      <img
+        class="card-img-top"
+        src="https://www.themoviedb.org/t/p/w220_and_h330_face/oJagOzBu9Rdd9BrciseCm3U3MCU.jpg"
+        style="height: 400px"
+        alt="Drama"
+      />
+      <div class="card-img-overlay">
+        <h5 class="card-title text-dark">Filmes de Drama</h5>
+        <br>
+        <a
+          href="{{url_for('filmes', categoria='drama')}}"
+          class="text-primary bg-info rounded text-light p-1 px-2"
+          >Assistir</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card mb-2">
+      <img
+        class="card-img-top"
+        src="https://www.themoviedb.org/t/p/w220_and_h330_face/bmUFMMbJJA2BXLhhLCGhLFOIPZP.jpg"
+        style="height: 400px"
+        alt="Ação"
+      />
+      <div class="card-img-overlay">
+        <h5 class="card-title text-light">Filmes populares</h5>
+        <br>
+        <a
+          href="{{url_for('filmes', categoria='populares')}}"
+          class="text-primary bg-info rounded text-light p-1 px-2"
+          >Assistir</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card mb-2">
+      <img
+        class="card-img-top"
+        src="https://www.themoviedb.org/t/p/w220_and_h330_face/pZke9IRWqbrBeliSw8usGmXqFTL.jpg"
+        style="height: 400px"
+        alt="Kids"
+      />
+      <div class="card-img-overlay">
+        <h5 class="card-title text-light">Filmes para Crianças</h5>
+        <br>
+        <a
+          href="{{url_for('filmes', categoria='kids')}}"
+          class="text-primary bg-info rounded text-light p-1 px-2"
+          >Assistir</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card mb-2">
+      <img
+        class="card-img-top"
+        src="https://www.themoviedb.org/t/p/w220_and_h330_face/jeGvNOVMs5QIU1VaoGvnd3gSv0G.jpg"
+        style="height: 400px"
+        alt="Tom Cruise"
+      />
+      <div class="card-img-overlay">
+        <h5 class="card-title text-light">Filmes do Tom Cruise</h5>
+        <br>
+        <a
+          href="{{url_for('filmes', categoria='tom_cruise')}}"
+          class="text-primary bg-info rounded text-light p-1 px-2"
+          >Assistir</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

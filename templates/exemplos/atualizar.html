@@ -1,0 +1,5 @@
+{% extends "contas/criar.html" %}
+
+{% block title %}DSList | Atualizar Transação{% endblock %}
+{% block submit %}Atualizar{% endblock %}
+{% block auxiliar_btn %} <a class="btn btn-danger text-light" href="{% url 'excluir' transacao.id %}">Excluir</a> {% endblock %}

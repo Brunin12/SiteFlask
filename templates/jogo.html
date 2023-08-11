@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Space Invaders</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: aquamarine;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+        background-color: blueviolet;
+        display: block; /* Adicione essa linha para garantir que o canvas seja exibido como bloco */
+      }
+
+      .ship {
+        fill: rgb(255, 238, 0);
+        stroke: rgb(183, 0, 255);
+        shape-rendering: crispEdges;
+        background-color: blue;
+        stroke-width: 2px;
+        width: 20px;
+        height: 20px;
+      }
+
+      .alien {
+        fill: rgb(0, 255, 64);
+        stroke: rgb(0, 255, 21);
+        background-color: greenyellow;
+        shape-rendering: crispEdges;
+        stroke-width: 2px;
+        width: 10px;
+        height: 10px;
+      }
+
+      .bullet {
+        fill: rgb(255, 0, 0);
+        stroke: rgb(255, 0, 0);
+        background-color: red;
+        shape-rendering: crispEdges;
+        stroke-width: 2px;
+        width: 5px;
+        height: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+
+      var ship = {
+        x: 200,
+        y: 200,
+        velocity: {
+          x: 0,
+          y: 0,
+        },
+      };
+
+      var aliens = [
+        {
+          x: 100,
+          y: 100,
+        },
+        {
+          x: 200,
+          y: 100,
+        },
+        {
+          x: 300,
+          y: 100,
+        },
+      ];
+
+      var bullets = [];
+
+      function draw() {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw the ship
+        ctx.save();
+        ctx.translate(ship.x, ship.y);
+        ctx.rotate(ship.rotation);
+        // Em vez de ctx.fillRect(-10, -10, 20, 20);, use:
+        ctx.fillRect(-10, -10, 20, 20);
+        ctx.restore();
+
+        // Draw the aliens
+        for (var i = 0; i < aliens.length; i++) {
+          ctx.fillRect(aliens[i].x, aliens[i].y, 10, 10);
+        }
+
+        // Draw the bullets
+        for (var i = 0; i < bullets.length; i++) {
+          ctx.fillRect(bullets[i].x, bullets[i].y, 5, 5);
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      function keyDown(event) {
+        switch (event.keyCode) {
+          case 37: // Tecla de seta esquerda
+            ship.rotation -= (Math.PI / 180) * 5; // Rotaciona em -5 graus
+            break;
+          case 39: // Tecla de seta direita
+            ship.rotation += (Math.PI / 180) * 5; // Rotaciona em +5 graus
+            break;
+          case 38:
+            ship.velocity.y -= 5;
+            break;
+          case 40:
+            ship.velocity.y += 5;
+            break;
+        }
+        draw()
+      }
+
+      function keyUp(event) {
+        switch (event.keyCode) {
+          case 37:
+          case 39:
+            ship.velocity.x = 0;
+            break;
+          case 38:
+          case 40:
+            ship.velocity.y = 0;
+            break;
+        }
+        draw()
+      }
+
+      function mouseDown(event) {
+        var bullet = {
+          x: ship.x,
+          y: ship.y,
+          velocity: {
+            x: event.x - ship.x,
+            y: event.y - ship.y,
+          },
+        };
+        bullets.push(bullet);
+        draw()
+      }
+
+      window.addEventListener("keydown", keyDown);
+      window.addEventListener("keyup", keyUp);
+      window.addEventListener("mousedown", mouseDown);
+      setInterval(draw(), 500)
+    </script>
+  </body>
+</html>

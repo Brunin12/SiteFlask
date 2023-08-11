@@ -1,0 +1,25 @@
+{% extends "contas/base.html" %}
+
+{% block title %}DSList | Adicionar Transação{% endblock %}
+{% block header %}Transação{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-12" style="font-size: 18px">
+    <form method="post" class="card card-primary">
+      {% csrf_token %}
+      <div class="card-body">
+      {{ form.as_p }}
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary text-light">
+          {% block submit %}Salvar{% endblock %}
+        </button>
+        {% block auxiliar_btn %}{% endblock %}
+        <a
+          href="{% url 'listagem' %}"
+          class="btn btn-secondary text-light"
+        >Cancelar</a>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

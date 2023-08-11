@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Flask App | Filmes{% endblock %} {%
+block header %}Super Movies{% endblock %} {% block content %}
+<hr />
+{% for filme in filmes %}
+<div class="row">
+  <div class="card p-3 shadow mx-auto my-2">
+    <div class="row">
+      <div class="col d-flex justify-content-start">
+        <h3 class="d-inline-block d-sm-none">{{filme.title}}</h3>
+        <div class="col-6">
+          <img
+          {% if filme.backdrop_path == None %}
+            src="/static/imagem-404.jpg"
+          {% else %}
+            src="https://image.tmdb.org/t/p/w500/{{filme.backdrop_path}}"
+          {% endif %}
+            class="product-image"
+            alt="{{filme.title}}"
+          />
+        </div>
+        <div class="col-6">
+          <h4 class="my-3">{{filme.title}} - {{filme.release_date}}</h4>
+          <p>{{filme.overview}}</p>
+          <p>Pontuação: {{filme.vote_average}}/10</p>
+          <p>Numero de Votos: {{filme.vote_count}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endfor %} {% endblock%}
+</div>

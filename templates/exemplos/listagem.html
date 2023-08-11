@@ -1,0 +1,50 @@
+{% extends "contas/base.html" %} {% block title %}DSList | Listagem de
+Transações{% endblock %} {% block header %}Listagem{% endblock %} {% block content %}
+<div class="row">
+  <div class="col-12" style="font-size: 18px">
+    <a
+      href="{% url 'criar' %}"
+      class="btn btn-primary w-100 mx-auto text-center mb-2"
+      >Criar</a
+    >
+    <br />
+    <strong style="font-size: 20px">Transações:</strong>
+    <br />
+    {% if saldo < 0 %}
+    <p class="text-danger">R$ {{ saldo }}</p>
+    {% else %}
+    <p class="text-success">R$ {{ saldo }}</p>
+    {% endif %}
+    <br />
+    {% for transacao in transacoes %}
+
+    <div class="card card-widget widget-user shadow">
+      <div class="widget-user-header bg-success text-white" style="height: 10%">
+        <h3 class="widget-user-username">{{ transacao.description }} - R$ {{ transacao.value }}</h3>
+      </div>
+      <div class="card-body bg-light rounded-bottom text-dark">
+        <p class="mb-1">{{ transacao.dt_creation }}</p>
+        <p class="mb-1">{{ transacao.category }}</p>
+        <p class="mb-0">R${{ transacao.value }}</p>
+        <div class="card card-widget widget-quote shadow m-3">
+          <blockquote>
+            <p class="quote-text text-light">" {{ transacao.notes }}"</p>
+          </blockquote>
+        </div>
+        <a
+          href="{% url 'atualizar' transacao.id %}"
+          class="btn btn-warning w-100 mx-auto text-light text-center mb-2"
+          >Atualizar</a
+        >
+        <a
+          class="btn btn-danger w-100 mx-auto text-center text-light mb-2"
+          href="{% url 'excluir' transacao.id %}"
+          >Excluir</a
+        >
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
